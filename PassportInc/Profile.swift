@@ -15,6 +15,7 @@ struct Profile {
     var age: Int
     var id: String
     var image: UIImage?
+    var imageURL: URL?
     var hobbies: [String]?
     var gender: String
     
@@ -32,5 +33,12 @@ struct Profile {
         name = profileDictionary["name"] as! String
         age = profileDictionary["age"] as! Int
         gender = profileDictionary["gender"] as! String
+    }
+    
+    init() {
+        name = ""
+        age = 0
+        id = ""
+        gender = ""
     }
 }

@@ -13,7 +13,6 @@ class ImageStore {
     
     private var imageStorage: FIRStorage!
     private var imageStorageRef: FIRStorageReference!
-    //private var profileRef: FIRStorageReference!
     private var imageRef: FIRStorageReference!
     
     init() {
@@ -23,27 +22,23 @@ class ImageStore {
         imageRef = imageStorageRef.child("images")
     }
    
-    func uploadImage(image: UIImage) -> URL {
+    func uploadImage(image: UIImage) {
         let data = UIImageJPEGRepresentation(image, 1.0)
-        var downloadURL: URL!
+        //var downloadURL: URL!
         let profilePictureRef = imageStorageRef.child("images/profile.jpg")
         
         let uploadTask = profilePictureRef.put(data!, metadata: nil) { (metadata, error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print("Error: \(error?.localizedDescription)")
                 return
             }
-            downloadURL = metadata?.downloadURL()
-            
         }
         uploadTask.resume()
         
-        return downloadURL
+        //return downloadURL
     }
     
     func downloadImage(imageURL: URL) -> UIImage {
-        
-        
         return UIImage()
     }
 }

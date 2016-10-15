@@ -11,8 +11,18 @@ import Firebase
 import FirebaseDatabase
 
 class AddProfileViewController: UIViewController {
-    var imageStore = ImageStore()
     
+    // MARK: Custom Properties
+    var imageStore = ImageStore()
+    var downloadURL: URL?
+    
+    // MARK: IBOutlet Properties
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var ageTextField: UITextField!
+    @IBOutlet var genderTextField: UITextField!
+    @IBOutlet var profilePictureImageView: UIImageView!
+    
+    // MARK: UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -27,6 +37,10 @@ class AddProfileViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
+    @IBAction func doneButtonTapped(sender: UIBarButtonItem) {
+        
+    }
+    
 }
 
 extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -37,7 +51,11 @@ extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigatio
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerEditedImage] as! UIImage
-        let downloadURL = imageStore.uploadImage(image: image)
+        
+        profilePictureImageView.image = image
+        imageStore.uploadImage(image: image)
+        
+        dismiss(animated: true, completion: nil)
     }
     
 }

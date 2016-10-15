@@ -90,43 +90,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1M2-Ba-YkF">
-                                <frame key="frameInset" minX="16" minY="72" width="343" height="30"/>
+                                <frame key="frameInset" minX="16" minY="162" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5cl-9d-C1B">
-                                <frame key="frameInset" minX="16" minY="123" width="343" height="30"/>
+                                <frame key="frameInset" minX="16" minY="200" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OFZ-sm-xZ6">
-                                <frame key="frameInset" minX="16" minY="185" width="343" height="30"/>
+                                <frame key="frameInset" minX="16" minY="238" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CLt-Hm-P4a">
-                                <frame key="frameInset" minX="16" minY="249" width="343" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="syG-nc-Xrr">
+                                <frame key="frameInset" minX="278" minY="72" width="81" height="82"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add A Profile" id="QSf-tE-yzL">
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="3mz-mb-erJ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="3mz-mb-erJ">
                             <connections>
                                 <action selector="cameraButtonTappedWithSender:" destination="cu2-47-gzg" id="sYf-VY-Aff"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="fHC-DE-ykK"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ageTextField" destination="5cl-9d-C1B" id="650-Pt-ZkL"/>
+                        <outlet property="genderTextField" destination="OFZ-sm-xZ6" id="wL1-Kz-B68"/>
+                        <outlet property="nameTextField" destination="1M2-Ba-YkF" id="km3-k5-amq"/>
+                        <outlet property="profilePictureImageView" destination="syG-nc-Xrr" id="3gw-bs-6C5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C31-Gl-Fva" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
