@@ -14,7 +14,6 @@ struct Profile {
     var name: String
     var age: Int
     var id: String
-    var backgroundColor: UIColor?
     var image: UIImage?
     var hobbies: [String]?
     var gender: String
@@ -24,8 +23,6 @@ struct Profile {
         self.name = name
         self.age = age
         self.gender = gender
-        
-       self.backgroundColor =  (self.gender == "M" ?  UIColor.blue : UIColor.green)
     }
     
     init(snapshot: FIRDataSnapshot) {

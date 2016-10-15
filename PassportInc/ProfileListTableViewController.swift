@@ -53,6 +53,13 @@ class ProfileListTableViewController: UITableViewController {
         return cell
     }
     
-    
+    // MARK: Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toProfileView" {
+            let destination = segue.destination as! ProfileViewController
+            let selectedIndexPath = tableView.indexPathForSelectedRow
+            destination.profileToView = profiles[selectedIndexPath!.row]
+        }
+    }
     
 }
