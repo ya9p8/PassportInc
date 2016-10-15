@@ -15,30 +15,44 @@ class ImageStore {
     private var imageStorageRef: FIRStorageReference!
     private var imageRef: FIRStorageReference!
     
+    typealias Completion = (_ success: Bool, _ url: URL) -> Void
+    
     init() {
         imageStorage = FIRStorage.storage()
         imageStorageRef = imageStorage.reference(withPath: "gs://passportinc-8091c.appspot.com")
-        //profileRef = imageStorageRef.child(<#T##path: String##String#>)
         imageRef = imageStorageRef.child("images")
     }
    
-    func uploadImage(image: UIImage) {
+    func uploadImage(image: UIImage, completionHandler: @escaping Completion) {
         let data = UIImageJPEGRepresentation(image, 1.0)
-        //var downloadURL: URL!
-        let profilePictureRef = imageStorageRef.child("images/profile.jpg")
+        var downloadURL: URL!
+        var flag: Bool!
+        let filePath = "\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
         
-        let uploadTask = profilePictureRef.put(data!, metadata: nil) { (metadata, error) in
+        imageRef.child(filePath).put(data!, metadata: nil) { (metadata, error) in
             if error != nil {
                 print("Error: \(error?.localizedDescription)")
+               // flag =  false
                 return
             }
+            flag  = true
+            downloadURL = metadata?.downloadURL()
+            completionHandler(flag, downloadURL)
         }
-        uploadTask.resume()
         
-        //return downloadURL
+       
     }
     
-    func downloadImage(imageURL: URL) -> UIImage {
-        return UIImage()
+    func downloadImage(imageURL: URL?) -> UIImage? {
+        do {
+            let data = try Data(contentsOf: imageURL!)
+            
+            // Convert to image
+            return UIImage(data: data)
+            
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
     }
 }

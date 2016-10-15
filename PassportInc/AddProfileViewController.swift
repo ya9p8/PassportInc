@@ -14,7 +14,7 @@ class AddProfileViewController: UIViewController {
     
     // MARK: Custom Properties
     var imageStore = ImageStore()
-    var downloadURL: URL?
+    var profile: Profile!
     
     // MARK: IBOutlet Properties
     @IBOutlet var nameTextField: UITextField!
@@ -34,7 +34,17 @@ class AddProfileViewController: UIViewController {
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
         
-        present(imagePicker, animated: true, completion: nil)
+        let profileAlert = UIAlertController(title: "Must create profile", message: "Please fill out the information before continuing.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        profileAlert.addAction(okAction)
+        
+        if let _ = profile {
+            present(imagePicker, animated: true, completion: nil)
+        } else {
+            // Alert them to fill out the information before selecting a profile pic
+            present(profileAlert, animated: true, completion: nil)
+        }
+        
     }
     
     @IBAction func doneButtonTapped(sender: UIBarButtonItem) {
@@ -53,7 +63,13 @@ extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigatio
         let image = info[UIImagePickerControllerEditedImage] as! UIImage
         
         profilePictureImageView.image = image
-        imageStore.uploadImage(image: image)
+        imageStore.uploadImage(image: image) { (success, url) in
+            if success {
+                self.profile.imageURL = url
+            } else {
+                // Error
+            }
+        }
         
         dismiss(animated: true, completion: nil)
     }
