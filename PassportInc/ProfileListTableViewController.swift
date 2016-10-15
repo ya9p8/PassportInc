@@ -15,6 +15,7 @@ class ProfileListTableViewController: UITableViewController {
     var profiles:[Profile] = []
     var ref: FIRDatabaseReference!
     var imageStore: ImageStore!
+    var filteredProfiles:[Profile] = []
     
     // MARK: UIViewController Lifecycle
     override func viewDidLoad() {
@@ -26,6 +27,7 @@ class ProfileListTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
          fetchProfiles()
     }
+    
     
     // MARK: Custom Methods
     func fetchProfiles() {
@@ -42,14 +44,54 @@ class ProfileListTableViewController: UITableViewController {
         })
     }
     
+    // MARK: IBAction Methods
+    @IBAction func sortAndFilterButtonTapped(_ sender: UIBarButtonItem) {
+        // Present options
+        let optionsAlert = UIAlertController(title: "Sort/Filter By:", message: nil, preferredStyle: .actionSheet)
+        
+        let filterOnlyMalesAction = UIAlertAction(title: "Filter By Male", style: .default) { (_) in
+            self.filteredProfiles = self.profiles.filter { $0.gender == "M" }
+            print(self.filteredProfiles)
+            self.tableView.reloadData()
+        }
+        
+        let filterOnlyFemalesAction = UIAlertAction(title: "Filter By Female", style: .default) { (_) in
+            self.filteredProfiles = self.profiles.filter { $0.gender == "F" }
+            self.tableView.reloadData()
+        }
+        
+        let sortByNameAction = UIAlertAction(title: "Sort By Name", style: .default) { (_) in
+            self.filteredProfiles = self.profiles.sorted{$0.0.name < $0.1.name }
+            self.tableView.reloadData()
+        }
+        
+        let sortByAge = UIAlertAction(title: "Sort By Age", style: .default) { (_) in
+            self.filteredProfiles = self.profiles.sorted{$0.0.age < $0.1.age }
+            self.tableView.reloadData()
+        }
+        
+        let clearFilterSortAction = UIAlertAction(title: "Clear Sorts and Filters", style: .default) { (_) in
+            self.filteredProfiles.removeAll()
+            self.tableView.reloadData()
+        }
+
+        
+        optionsAlert.addAction(filterOnlyMalesAction)
+        optionsAlert.addAction(filterOnlyFemalesAction)
+        optionsAlert.addAction(sortByNameAction)
+        optionsAlert.addAction(sortByAge)
+        optionsAlert.addAction(clearFilterSortAction)
+        present(optionsAlert, animated: true, completion: nil)
+    }
+    
     // MARK: UITableView DataSource Methods
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return profiles.count
+        return filteredProfiles.isEmpty ? profiles.count : filteredProfiles.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell") as! ProfileTableViewCell
-        let profile = profiles[indexPath.row]
+        let profile = filteredProfiles.isEmpty ? profiles[indexPath.row] : filteredProfiles[indexPath.row]
         cell.profile = profile
 
         return cell

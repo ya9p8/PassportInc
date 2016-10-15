@@ -65,7 +65,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Passport" id="DFk-8U-PdO">
-                        <barButtonItem key="leftBarButtonItem" title="Sort" id="n6K-Pq-3x8"/>
+                        <barButtonItem key="leftBarButtonItem" title="Sort/Filter" id="n6K-Pq-3x8">
+                            <connections>
+                                <action selector="sortAndFilterButtonTapped:" destination="OIg-wJ-nBP" id="3JJ-BS-lNn"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="fY9-56-vjT">
                             <connections>
                                 <segue destination="cu2-47-gzg" kind="show" id="gDT-9Z-TpJ"/>
