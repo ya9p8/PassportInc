@@ -13,12 +13,13 @@ import FirebaseDatabase
 
 class ProfileListTableViewController: UITableViewController {
     var profiles:[Profile] = []
-    let ref = FIRDatabase.database().reference(withPath: "profiles")
+    var ref: FIRDatabaseReference!
     
     
     // MARK: UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = FIRDatabase.database().reference(withPath: "profiles")
         
         fetchProfiles()
     }
@@ -41,10 +42,13 @@ class ProfileListTableViewController: UITableViewController {
     }
     
     // MARK: UITableView DataSource Methods
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return profiles.count }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return profiles.count
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell") as! ProfileTableViewCell
+        cell.profile = profiles[indexPath.row]
         
         return cell
     }

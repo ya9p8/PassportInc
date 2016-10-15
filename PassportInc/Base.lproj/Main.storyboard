@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Profile List Table View Controller-->
+        <!--Passport-->
         <scene sceneID="SCK-pk-bcO">
             <objects>
                 <tableViewController id="OIg-wJ-nBP" customClass="ProfileListTableViewController" customModule="PassportInc" customModuleProvider="target" sceneMemberID="viewController">
@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileCell" rowHeight="67" id="rIn-wu-k2v">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileCell" rowHeight="67" id="rIn-wu-k2v" customClass="ProfileTableViewCell" customModule="PassportInc" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="375" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rIn-wu-k2v" id="Kgo-bg-m7h">
@@ -49,6 +49,12 @@
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="ageLabel" destination="R2B-9t-svR" id="Fak-mA-tnZ"/>
+                                    <outlet property="genderLabel" destination="Q3Z-lB-maY" id="XoX-bf-DqQ"/>
+                                    <outlet property="nameLabel" destination="fVO-gA-Fzx" id="XMq-id-1d4"/>
+                                    <outlet property="profileImageView" destination="Mrf-rg-nZQ" id="SNn-Li-hn8"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -56,7 +62,7 @@
                             <outlet property="delegate" destination="OIg-wJ-nBP" id="nxn-5n-qfL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="DFk-8U-PdO"/>
+                    <navigationItem key="navigationItem" title="Passport" id="DFk-8U-PdO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="POi-SJ-l3T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
