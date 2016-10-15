@@ -14,12 +14,13 @@ import FirebaseDatabase
 class ProfileListTableViewController: UITableViewController {
     var profiles:[Profile] = []
     var ref: FIRDatabaseReference!
-    
+    var imageStore: ImageStore!
     
     // MARK: UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference(withPath: "profiles")
+        imageStore = ImageStore()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,9 +49,21 @@ class ProfileListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell") as! ProfileTableViewCell
-        cell.profile = profiles[indexPath.row]
+        var profile = profiles[indexPath.row]
+        profile.image = imageStore.downloadImage(imageURLString: profile.imageURLString)
+        cell.profile = profile
+        
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // remove from database
+            let profileToDelete = profiles[indexPath.row]
+            ref.child(profileToDelete.id).removeValue()
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: Navigation

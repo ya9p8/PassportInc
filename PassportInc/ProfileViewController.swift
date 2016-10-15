@@ -12,7 +12,6 @@ import UIKit
 class ProfileViewController: UIViewController {
     // MARK: Custom Properties
     var profileToView: Profile!
-    var imageStore = ImageStore()
     
     // MARK: IBOutlet Properties
     @IBOutlet var genderLabel: UILabel!
@@ -27,7 +26,6 @@ class ProfileViewController: UIViewController {
         self.view.backgroundColor = profileToView.gender == "M" ? UIColor.blue : UIColor.green
         self.genderLabel.text = profileToView.gender
         self.ageLabel.text = "\(profileToView.age)"
-        
-        profileImageView.image = imageStore.downloadImage(imageURL: profileToView.imageURL)
+        self.profileImageView.image = profileToView.image
     }
 }

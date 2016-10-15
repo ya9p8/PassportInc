@@ -27,5 +27,6 @@ class ProfileTableViewCell: UITableViewCell {
         nameLabel.text = "Name: \(profile.name)"
         ageLabel.text = "Age: \(profile.age)"
         genderLabel.text = "Gender: \(profile.gender)"
+        profileImageView.image = profile.image
     }
 }

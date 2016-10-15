@@ -43,7 +43,10 @@ class ImageStore {
        
     }
     
-    func downloadImage(imageURL: URL?) -> UIImage? {
+    func downloadImage(imageURLString:String?) -> UIImage? {
+        
+        let imageURL = URL(string: imageURLString!)
+        
         do {
             let data = try Data(contentsOf: imageURL!)
             // Convert to image
