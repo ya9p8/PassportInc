@@ -49,11 +49,9 @@ class ProfileListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell") as! ProfileTableViewCell
-        var profile = profiles[indexPath.row]
-        profile.image = imageStore.downloadImage(imageURLString: profile.imageURLString)
+        let profile = profiles[indexPath.row]
         cell.profile = profile
-        
-        
+
         return cell
     }
     

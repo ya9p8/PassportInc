@@ -22,6 +22,7 @@ class ProfileViewController: UIViewController {
     
     // MARK: UIViewController Lifecycle
     override func viewDidLoad() {
+        
         self.navigationItem.title = profileToView.name
         self.view.backgroundColor = profileToView.gender == "M" ? UIColor.blue : UIColor.green
         self.genderLabel.text = profileToView.gender

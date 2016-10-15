@@ -11,10 +11,12 @@ import UIKit
 
 class ProfileTableViewCell: UITableViewCell {
     
+    
     // MARK: Custom Properties
     var profile: Profile! {
         didSet { updateUI() }
     }
+    
     
     // MARK: IBOutlet Properties
     @IBOutlet var nameLabel: UILabel!

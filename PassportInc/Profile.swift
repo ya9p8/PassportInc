@@ -33,13 +33,10 @@ struct Profile {
         name = profileDictionary["name"] as! String
         age = profileDictionary["age"] as! String
         gender = profileDictionary["gender"] as! String
-        imageURLString = profileDictionary["imageURL"] as! String
+        imageURLString = profileDictionary["imageURL"] as! String?
+        
+        let imageStore = ImageStore()
+        image = imageStore.downloadImage(imageURLString: imageURLString)
     }
     
-    init() {
-        name = ""
-        age = ""
-        id = ""
-        gender = ""
-    }
 }
