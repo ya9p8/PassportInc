@@ -37,7 +37,7 @@ class ProfileListTableViewController: UITableViewController {
                 newProfiles.append(newProfile)
             }
             
-            self.profiles = newProfiles
+            self.profiles = newProfiles.sorted{$0.0.id < $0.1.id}
             self.tableView.reloadData()
         })
     }
