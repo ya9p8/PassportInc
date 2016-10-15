@@ -12,14 +12,14 @@ import FirebaseDatabase
 
 struct Profile {
     var name: String
-    var age: Int
+    var age: String
     var id: String
     var image: UIImage?
     var imageURL: URL?
     var hobbies: [String]?
     var gender: String
     
-    init(name: String, age: Int, gender: String, id: String = "") {
+    init(name: String, age: String, gender: String, id: String = "") {
         self.id = id
         self.name = name
         self.age = age
@@ -31,13 +31,13 @@ struct Profile {
        let profileDictionary = snapshot.value as! [String: AnyObject]
         
         name = profileDictionary["name"] as! String
-        age = profileDictionary["age"] as! Int
+        age = profileDictionary["age"] as! String
         gender = profileDictionary["gender"] as! String
     }
     
     init() {
         name = ""
-        age = 0
+        age = ""
         id = ""
         gender = ""
     }

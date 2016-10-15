@@ -14,7 +14,8 @@ class AddProfileViewController: UIViewController {
     
     // MARK: Custom Properties
     var imageStore = ImageStore()
-    var profile: Profile!
+    var profileImageUrl: URL!
+    let databaseRef = FIRDatabase.database().reference()
     
     // MARK: IBOutlet Properties
     @IBOutlet var nameTextField: UITextField!
@@ -34,21 +35,37 @@ class AddProfileViewController: UIViewController {
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
         
-        let profileAlert = UIAlertController(title: "Must create profile", message: "Please fill out the information before continuing.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        profileAlert.addAction(okAction)
-        
-        if let _ = profile {
-            present(imagePicker, animated: true, completion: nil)
-        } else {
-            // Alert them to fill out the information before selecting a profile pic
-            present(profileAlert, animated: true, completion: nil)
-        }
+        present(imagePicker, animated: true, completion: nil)
         
     }
     
     @IBAction func doneButtonTapped(sender: UIBarButtonItem) {
+        if let name = nameTextField.text, let age = ageTextField.text, let gender = genderTextField.text {
+            let lowercasedGender = gender.lowercased()
+            var realGender: String!
+            if lowercasedGender == "m" || lowercasedGender == "male" {
+                realGender = "M"
+            } else if lowercasedGender == "f" || lowercasedGender == "female" {
+                realGender = "F"
+            } else {
+                // ERROR
+            }
+            
+            if let imageURL = profileImageUrl {
+                let urlString = "\(imageURL)"
+                
+                let profileDictionary = ["name": name, "age": age, "gender": realGender, "imageURL": urlString] as [String: Any]
+                databaseRef.child("profiles").childByAutoId().setValue(profileDictionary)
+                let _ = navigationController?.popViewController(animated: true)
+            } else {
+                print("Error with profile URL")
+            }
+            
+        } else {
+            print("Please fill out all information")
+        }
         
+       
     }
     
 }
@@ -65,13 +82,14 @@ extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigatio
         profilePictureImageView.image = image
         imageStore.uploadImage(image: image) { (success, url) in
             if success {
-                self.profile.imageURL = url
+                self.profileImageUrl = url
+                self.dismiss(animated: true, completion: nil)
             } else {
-                // Error
+                print("There was an error")
             }
         }
         
-        dismiss(animated: true, completion: nil)
+       
     }
     
 }

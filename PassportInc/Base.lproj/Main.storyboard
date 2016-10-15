@@ -68,7 +68,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Sort" id="n6K-Pq-3x8"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="fY9-56-vjT">
                             <connections>
-                                <segue destination="cu2-47-gzg" kind="show" identifier="toAddProfile" id="yiD-Dc-qZf"/>
+                                <segue destination="cu2-47-gzg" kind="show" id="gDT-9Z-TpJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -117,15 +117,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add A Profile" id="QSf-tE-yzL">
-                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="3mz-mb-erJ">
+                    <navigationItem key="navigationItem" title="Add A Profile" id="6D7-k9-c8Q">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="io9-o8-goh">
                             <connections>
-                                <action selector="cameraButtonTappedWithSender:" destination="cu2-47-gzg" id="sYf-VY-Aff"/>
+                                <action selector="doneButtonTappedWithSender:" destination="cu2-47-gzg" id="suk-yy-TdH"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="fHC-DE-ykK">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="uUd-YM-Zjw">
                             <connections>
-                                <action selector="doneButtonTappedWithSender:" destination="cu2-47-gzg" id="YxF-46-CsH"/>
+                                <action selector="cameraButtonTappedWithSender:" destination="cu2-47-gzg" id="aCq-Tw-4Hv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

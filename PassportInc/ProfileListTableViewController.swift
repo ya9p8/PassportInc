@@ -20,7 +20,10 @@ class ProfileListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference(withPath: "profiles")
-        fetchProfiles()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+         fetchProfiles()
     }
     
     // MARK: Custom Methods

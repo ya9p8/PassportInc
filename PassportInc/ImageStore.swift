@@ -31,7 +31,7 @@ class ImageStore {
         
         imageRef.child(filePath).put(data!, metadata: nil) { (metadata, error) in
             if error != nil {
-                print("Error: \(error?.localizedDescription)")
+                print("Error: \(error?.localizedDescription)\n\n\n")
                // flag =  false
                 return
             }
@@ -46,10 +46,8 @@ class ImageStore {
     func downloadImage(imageURL: URL?) -> UIImage? {
         do {
             let data = try Data(contentsOf: imageURL!)
-            
             // Convert to image
             return UIImage(data: data)
-            
         } catch {
             print(error.localizedDescription)
             return nil
