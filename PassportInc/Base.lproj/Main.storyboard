@@ -65,6 +65,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Passport" id="DFk-8U-PdO">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="n6K-Pq-3x8"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="fY9-56-vjT">
                             <connections>
                                 <segue destination="cu2-47-gzg" kind="show" identifier="toAddProfile" id="yiD-Dc-qZf"/>
@@ -200,7 +201,9 @@
                             <constraint firstItem="Oyz-fU-LSl" firstAttribute="centerX" secondItem="zzk-nj-qdP" secondAttribute="centerX" id="sX0-fE-qZE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="M2H-Ww-Kwt"/>
+                    <navigationItem key="navigationItem" title="Title" id="M2H-Ww-Kwt">
+                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="edit" id="Rp7-ga-sUc"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="ageLabel" destination="aBk-7E-mOb" id="9TH-Ib-oCi"/>
                         <outlet property="genderLabel" destination="Oyz-fU-LSl" id="iMK-5q-acA"/>

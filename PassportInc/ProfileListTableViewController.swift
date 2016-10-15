@@ -20,7 +20,6 @@ class ProfileListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference(withPath: "profiles")
-        
         fetchProfiles()
     }
     
@@ -37,8 +36,6 @@ class ProfileListTableViewController: UITableViewController {
             self.profiles = newProfiles
             self.tableView.reloadData()
         })
-        
-        
     }
     
     // MARK: UITableView DataSource Methods
