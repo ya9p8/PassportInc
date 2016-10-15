@@ -77,10 +77,10 @@
             </objects>
             <point key="canvasLocation" x="1239.2" y="165.06746626686657"/>
         </scene>
-        <!--View Controller-->
+        <!--Add A Profile-->
         <scene sceneID="zyK-FE-S1o">
             <objects>
-                <viewController id="cu2-47-gzg" sceneMemberID="viewController">
+                <viewController id="cu2-47-gzg" customClass="AddProfileViewController" customModule="PassportInc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cDU-ea-kQg"/>
                         <viewControllerLayoutGuide type="bottom" id="7Oo-7j-3HC"/>
@@ -120,6 +120,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Add A Profile" id="QSf-tE-yzL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="3mz-mb-erJ">
+                            <connections>
+                                <action selector="cameraButtonTappedWithSender:" destination="cu2-47-gzg" id="sYf-VY-Aff"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C31-Gl-Fva" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

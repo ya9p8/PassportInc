@@ -18,6 +18,7 @@
 		DB8CBD6C1DB1A91300593825 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8CBD6B1DB1A91300593825 /* ProfileTableViewCell.swift */; };
 		DB8CBD6E1DB1B96D00593825 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8CBD6D1DB1B96D00593825 /* ProfileViewController.swift */; };
 		DB8CBD701DB1C3D600593825 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8CBD6F1DB1C3D600593825 /* ImageStore.swift */; };
+		DB8CBD761DB1E7F400593825 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8CBD751DB1E7F400593825 /* AddProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		DB8CBD6B1DB1A91300593825 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		DB8CBD6D1DB1B96D00593825 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DB8CBD6F1DB1C3D600593825 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
+		DB8CBD751DB1E7F400593825 /* AddProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
 		F528003411A3BE19F827E912 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -84,8 +86,8 @@
 				DB8CBD6A1DB1A90300593825 /* View */,
 				DB8CBD641DB1947900593825 /* Model */,
 				DB8CBD631DB1946E00593825 /* Controller */,
+				DB8CBD711DB1C6AF00593825 /* Store */,
 				DB8CBD5A1DB1865E00593825 /* Supporting Files */,
-				DB8CBD6F1DB1C3D600593825 /* ImageStore.swift */,
 			);
 			path = PassportInc;
 			sourceTree = "<group>";
@@ -108,6 +110,7 @@
 			children = (
 				DB8CBD611DB192C200593825 /* ProfileListTableViewController.swift */,
 				DB8CBD6D1DB1B96D00593825 /* ProfileViewController.swift */,
+				DB8CBD751DB1E7F400593825 /* AddProfileViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -126,6 +129,14 @@
 				DB8CBD6B1DB1A91300593825 /* ProfileTableViewCell.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		DB8CBD711DB1C6AF00593825 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				DB8CBD6F1DB1C3D600593825 /* ImageStore.swift */,
+			);
+			name = Store;
 			sourceTree = "<group>";
 		};
 		E5B2974BE66BCEB1BA636DE5 /* Frameworks */ = {
@@ -265,6 +276,7 @@
 				DB8CBD491DB1864D00593825 /* AppDelegate.swift in Sources */,
 				DB8CBD6C1DB1A91300593825 /* ProfileTableViewCell.swift in Sources */,
 				DB8CBD6E1DB1B96D00593825 /* ProfileViewController.swift in Sources */,
+				DB8CBD761DB1E7F400593825 /* AddProfileViewController.swift in Sources */,
 				DB8CBD5E1DB18A2E00593825 /* Profile.swift in Sources */,
 				DB8CBD621DB192C200593825 /* ProfileListTableViewController.swift in Sources */,
 				DB8CBD701DB1C3D600593825 /* ImageStore.swift in Sources */,
