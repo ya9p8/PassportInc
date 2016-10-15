@@ -11,6 +11,7 @@ import Firebase
 import FirebaseDatabase
 
 class AddProfileViewController: UIViewController {
+    var imageStore = ImageStore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,5 +30,14 @@ class AddProfileViewController: UIViewController {
 }
 
 extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image = info[UIImagePickerControllerEditedImage] as! UIImage
+        let downloadURL = imageStore.uploadImage(image: image)
+    }
     
 }
