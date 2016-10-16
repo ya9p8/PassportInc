@@ -15,6 +15,7 @@ class ImageStore {
     private var imageStorageRef: FIRStorageReference!
     private var imageRef: FIRStorageReference!
     
+    
     typealias Completion = (_ success: Bool, _ url: URL) -> Void
     
     init() {
@@ -22,25 +23,22 @@ class ImageStore {
         imageStorageRef = imageStorage.reference(withPath: "gs://passportinc-8091c.appspot.com")
         imageRef = imageStorageRef.child("images")
     }
-   
+    
     func uploadImage(image: UIImage, completionHandler: @escaping Completion) {
         let data = UIImageJPEGRepresentation(image, 1.0)
-        var downloadURL: URL!
         var flag: Bool!
-        let filePath = "\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
+        let uid = NSUUID()
+        let filePath = "\(uid)\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
         
         imageRef.child(filePath).put(data!, metadata: nil) { (metadata, error) in
             if error != nil {
-                print("Error: \(error?.localizedDescription)\n\n\n")
-               // flag =  false
+                print("Error: \(error?.localizedDescription)")
+                flag =  false
                 return
             }
             flag  = true
-            downloadURL = metadata?.downloadURL()
-            completionHandler(flag, downloadURL)
+            completionHandler(flag, metadata!.downloadURL()!)
         }
-        
-       
     }
     
     func downloadImage(imageURLString:String?) -> UIImage? {

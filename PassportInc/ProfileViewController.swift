@@ -91,6 +91,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return hobbyArray.count
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let hobbyToDelete = self.profileToView.hobbies![indexPath.row]
+            ref.child("hobbies").child(hobbyToDelete.key).removeValue()
+            fetchHobbies()
+        }
+    }
+    
+    
     // MARK: IBAction Methods
     @IBAction func addAHobbyButtonTapped(_ sender: UIBarButtonItem) {
         let hobbyAlert = UIAlertController(title: "Add a Hobby", message: nil, preferredStyle: .alert)
@@ -122,7 +131,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 self.ref.child("color").setValue(self.profileToView.backgroundColor!.rawValue)
             })
-            
             changeColorPrompt.addAction(action)
         }
         

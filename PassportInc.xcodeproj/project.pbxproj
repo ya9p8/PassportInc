@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A0DFDF6A6CD946D30AD74221 /* Pods_PassportInc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61A3B1BD6284EF653CF66B7C /* Pods_PassportInc.framework */; };
-		DB82E8D51DB29178009CD553 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB82E8D41DB29178009CD553 /* FirebaseManager.swift */; };
 		DB8CBD491DB1864D00593825 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8CBD481DB1864D00593825 /* AppDelegate.swift */; };
 		DB8CBD4E1DB1864D00593825 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB8CBD4C1DB1864D00593825 /* Main.storyboard */; };
 		DB8CBD501DB1864D00593825 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB8CBD4F1DB1864D00593825 /* Assets.xcassets */; };
@@ -26,7 +25,6 @@
 		16A8201BD1F11E952E70AF7A /* Pods-PassportInc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassportInc.release.xcconfig"; path = "Pods/Target Support Files/Pods-PassportInc/Pods-PassportInc.release.xcconfig"; sourceTree = "<group>"; };
 		61A3B1BD6284EF653CF66B7C /* Pods_PassportInc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PassportInc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08DB1696A2745A3240BDD55 /* Pods-PassportInc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassportInc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PassportInc/Pods-PassportInc.debug.xcconfig"; sourceTree = "<group>"; };
-		DB82E8D41DB29178009CD553 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		DB8CBD451DB1864D00593825 /* PassportInc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassportInc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB8CBD481DB1864D00593825 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB8CBD4D1DB1864D00593825 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				DB8CBD5D1DB18A2E00593825 /* Profile.swift */,
-				DB82E8D41DB29178009CD553 /* FirebaseManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -280,7 +277,6 @@
 				DB8CBD6C1DB1A91300593825 /* ProfileTableViewCell.swift in Sources */,
 				DB8CBD6E1DB1B96D00593825 /* ProfileViewController.swift in Sources */,
 				DB8CBD761DB1E7F400593825 /* AddProfileViewController.swift in Sources */,
-				DB82E8D51DB29178009CD553 /* FirebaseManager.swift in Sources */,
 				DB8CBD5E1DB18A2E00593825 /* Profile.swift in Sources */,
 				DB8CBD621DB192C200593825 /* ProfileListTableViewController.swift in Sources */,
 				DB8CBD701DB1C3D600593825 /* ImageStore.swift in Sources */,
