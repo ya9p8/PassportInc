@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK: Custom Properties
     var profileToView: Profile!
     var ref: FIRDatabaseReference!
@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet var genderLabel: UILabel!
     @IBOutlet var ageLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet var hobbiesTextView: UITextView!
+    @IBOutlet var hobbiesTableView: UITableView!
     
     // MARK: UIViewController Lifecycle
     override func viewDidLoad() {
@@ -35,9 +35,13 @@ class ProfileViewController: UIViewController {
         ref = FIRDatabase.database().reference().child("profiles").child(profileToView.id)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        fetchHobbies()
+    }
+    
+    //MARK: Custom Functions
     func setBackgroundColor() {
         var background: UIColor!
-        
         
         switch profileToView.backgroundColor! {
         case .blue:
@@ -57,7 +61,55 @@ class ProfileViewController: UIViewController {
         self.view.backgroundColor = background
     }
     
+    func fetchHobbies() {
+        ref.child("hobbies").observe(.value, with: { snapshot in
+            var fetchedHobbies: [Hobby] = []
+            
+            for snap in snapshot.children {
+                let hobby = Hobby(snapshot: snap as! FIRDataSnapshot)
+                fetchedHobbies.append(hobby)
+            }
+            
+            self.profileToView.hobbies = fetchedHobbies
+            self.hobbiesTableView.reloadData()
+        })
+    }
+    
+    
+    // MARK: UITableView Delegate Methods
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HobbyCell")!
+        let hobby = profileToView.hobbies![indexPath.row] 
+        cell.textLabel?.text = hobby.text
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let hobbyArray = self.profileToView.hobbies else { return 0 }
+        
+        return hobbyArray.count
+    }
+    
+    // MARK: IBAction Methods
     @IBAction func addAHobbyButtonTapped(_ sender: UIBarButtonItem) {
+        let hobbyAlert = UIAlertController(title: "Add a Hobby", message: nil, preferredStyle: .alert)
+        hobbyAlert.addTextField(configurationHandler: nil)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+            let hobbyText = hobbyAlert.textFields!.first!.text
+            
+            // Add hobby to database
+            self.ref.child("hobbies").childByAutoId().setValue(hobbyText)
+        
+            self.fetchHobbies()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        hobbyAlert.addAction(okAction)
+        hobbyAlert.addAction(cancelAction)
+        present(hobbyAlert, animated: true, completion: nil)
     }
     
     @IBAction func onChangeColorButtonTapped(_ sender: UIBarButtonItem) {

@@ -198,21 +198,34 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="15" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3MM-p2-N24">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="34" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3MM-p2-N24">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="161" id="JVQ-RD-fco"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HobbyCell" rowHeight="15" id="vkR-PW-iRi">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="15"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HobbyCell" textLabel="83i-RG-x4R" rowHeight="34" style="IBUITableViewCellStyleDefault" id="vkR-PW-iRi">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="34"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vkR-PW-iRi" id="PGH-l8-Vyt">
-                                            <frame key="frameInset" width="375" height="14"/>
+                                            <frame key="frameInset" width="375" height="33"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="83i-RG-x4R">
+                                                    <frame key="frameInset" minX="15" width="345" height="33"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="KzN-gP-cFJ" id="bnf-Gr-Clw"/>
+                                    <outlet property="delegate" destination="KzN-gP-cFJ" id="K6D-RE-vMI"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hobbies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipM-8T-ycN">
                                 <constraints>
@@ -268,6 +281,7 @@
                     <connections>
                         <outlet property="ageLabel" destination="aBk-7E-mOb" id="9TH-Ib-oCi"/>
                         <outlet property="genderLabel" destination="Oyz-fU-LSl" id="iMK-5q-acA"/>
+                        <outlet property="hobbiesTableView" destination="3MM-p2-N24" id="kmd-aZ-gVt"/>
                         <outlet property="profileImageView" destination="P9r-MK-0k6" id="AEh-bH-hyC"/>
                     </connections>
                 </viewController>

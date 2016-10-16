@@ -21,13 +21,24 @@ enum ProfileColor : String {
     static let allValues = [red, orange, yellow, green, blue, white]
 }
 
+struct Hobby {
+    var key: String
+    var text: String
+    
+    init(snapshot: FIRDataSnapshot) {
+        key = snapshot.key
+        text = snapshot.value as! String
+    }
+}
+
+
 struct Profile {
     var name: String
     var age: String
     var id: String
     var image: UIImage?
     var imageURLString: String?
-    var hobbies: [String]?
+    var hobbies: [Hobby]?
     var gender: String
     var backgroundColor: ProfileColor?
     
