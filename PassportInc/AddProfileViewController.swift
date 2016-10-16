@@ -13,9 +13,9 @@ import FirebaseDatabase
 class AddProfileViewController: UIViewController {
     
     // MARK: Custom Properties
-    var imageStore = ImageStore()
+    var imageStore: ImageStore!
     var profileImageUrl: URL!
-    let databaseRef = FIRDatabase.database().reference()
+    var databaseRef: FIRDatabaseReference!
     
     // MARK: IBOutlet Properties
     @IBOutlet var nameTextField: UITextField!
@@ -26,6 +26,8 @@ class AddProfileViewController: UIViewController {
     // MARK: UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        imageStore = ImageStore()
+        databaseRef = FIRDatabase.database().reference()
     }
     
     // MARK: IBAction Methods
@@ -36,14 +38,18 @@ class AddProfileViewController: UIViewController {
         imagePicker.allowsEditing = true
         
         present(imagePicker, animated: true, completion: nil)
-        
     }
     
     @IBAction func doneButtonTapped(sender: UIBarButtonItem) {
-        if let name = nameTextField.text, let age = ageTextField.text, let gender = genderTextField.text {
+        let name = nameTextField.text!
+        let age = ageTextField.text!
+        let gender = genderTextField.text!
+        
+        if !name.isEmpty && !age.isEmpty && !gender.isEmpty && profilePictureImageView != nil {
             let lowercasedGender = gender.lowercased()
             var realGender: String!
             var backgroundColor: ProfileColor!
+           
             if lowercasedGender == "m" || lowercasedGender == "male" {
                 realGender = "M"
                 backgroundColor = .blue
@@ -51,7 +57,7 @@ class AddProfileViewController: UIViewController {
                 realGender = "F"
                 backgroundColor = .green
             } else {
-                // ERROR
+                showErrorAlert(message: "Please select male or female.")
             }
             
             if let imageURL = profileImageUrl {
@@ -61,17 +67,25 @@ class AddProfileViewController: UIViewController {
                 databaseRef.child("profiles").childByAutoId().setValue(profileDictionary)
                 let _ = navigationController?.popViewController(animated: true)
             } else {
-                print("Error with profile URL")
+                showErrorAlert(message: "There was a problem saving the profile picture. Please try again.")
             }
             
         } else {
-            print("Please fill out all information")
+            showErrorAlert(message: "Please fill out all information.")
         }
+    }
+    
+    func showErrorAlert(message: String) {
+        let errorAlert = UIAlertController(title: "An error occurred.", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         
-       
+        errorAlert.addAction(okAction)
+        present(errorAlert, animated: true, completion: nil)
+        
     }
     
 }
+
 
 extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
