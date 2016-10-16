@@ -13,9 +13,9 @@ import FirebaseDatabase
 class AddProfileViewController: UIViewController {
     
     // MARK: Custom Properties
-    var imageStore = ImageStore()
+    var imageStore: ImageStore!
     var profileImageUrl: URL!
-    let databaseRef = FIRDatabase.database().reference()
+    var databaseRef: FIRDatabaseReference!
     
     // MARK: IBOutlet Properties
     @IBOutlet var nameTextField: UITextField!
@@ -26,6 +26,8 @@ class AddProfileViewController: UIViewController {
     // MARK: UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        imageStore = ImageStore()
+        databaseRef = FIRDatabase.database().reference()
     }
     
     // MARK: IBAction Methods
@@ -36,7 +38,6 @@ class AddProfileViewController: UIViewController {
         imagePicker.allowsEditing = true
         
         present(imagePicker, animated: true, completion: nil)
-        
     }
     
     @IBAction func doneButtonTapped(sender: UIBarButtonItem) {
@@ -44,10 +45,11 @@ class AddProfileViewController: UIViewController {
         let age = ageTextField.text!
         let gender = genderTextField.text!
         
-        if !name.isEmpty && !age.isEmpty && !gender.isEmpty {
+        if !name.isEmpty && !age.isEmpty && !gender.isEmpty && profilePictureImageView != nil {
             let lowercasedGender = gender.lowercased()
             var realGender: String!
             var backgroundColor: ProfileColor!
+           
             if lowercasedGender == "m" || lowercasedGender == "male" {
                 realGender = "M"
                 backgroundColor = .blue
@@ -55,7 +57,7 @@ class AddProfileViewController: UIViewController {
                 realGender = "F"
                 backgroundColor = .green
             } else {
-                // ERROR
+                showErrorAlert(message: "Please select male or female.")
             }
             
             if let imageURL = profileImageUrl {
@@ -69,7 +71,7 @@ class AddProfileViewController: UIViewController {
             }
             
         } else {
-            showErrorAlert(message: "Please fill out all information")
+            showErrorAlert(message: "Please fill out all information.")
         }
     }
     
@@ -83,8 +85,6 @@ class AddProfileViewController: UIViewController {
     }
     
 }
-
-
 
 
 extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
