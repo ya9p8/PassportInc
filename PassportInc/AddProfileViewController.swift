@@ -40,7 +40,11 @@ class AddProfileViewController: UIViewController {
     }
     
     @IBAction func doneButtonTapped(sender: UIBarButtonItem) {
-        if let name = nameTextField.text, let age = ageTextField.text, let gender = genderTextField.text {
+        let name = nameTextField.text!
+        let age = ageTextField.text!
+        let gender = genderTextField.text!
+        
+        if !name.isEmpty && !age.isEmpty && !gender.isEmpty {
             let lowercasedGender = gender.lowercased()
             var realGender: String!
             var backgroundColor: ProfileColor!
@@ -61,17 +65,27 @@ class AddProfileViewController: UIViewController {
                 databaseRef.child("profiles").childByAutoId().setValue(profileDictionary)
                 let _ = navigationController?.popViewController(animated: true)
             } else {
-                print("Error with profile URL")
+                showErrorAlert(message: "There was a problem saving the profile picture. Please try again.")
             }
             
         } else {
-            print("Please fill out all information")
+            showErrorAlert(message: "Please fill out all information")
         }
+    }
+    
+    func showErrorAlert(message: String) {
+        let errorAlert = UIAlertController(title: "An error occurred.", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         
-       
+        errorAlert.addAction(okAction)
+        present(errorAlert, animated: true, completion: nil)
+        
     }
     
 }
+
+
+
 
 extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
