@@ -10,6 +10,17 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+enum ProfileColor : String {
+    case red = "red"
+    case orange = "orange"
+    case yellow = "yellow"
+    case green = "green"
+    case blue = "blue"
+    case white = "white"
+    
+    static let allValues = [red, orange, yellow, green, blue, white]
+}
+
 struct Profile {
     var name: String
     var age: String
@@ -18,6 +29,7 @@ struct Profile {
     var imageURLString: String?
     var hobbies: [String]?
     var gender: String
+    var backgroundColor: ProfileColor?
     
     init(name: String, age: String, gender: String, id: String = "") {
         self.id = id
@@ -34,6 +46,9 @@ struct Profile {
         age = profileDictionary["age"] as! String
         gender = profileDictionary["gender"] as! String
         imageURLString = profileDictionary["imageURL"] as! String?
+        if let color = profileDictionary["color"] as! String? {
+            backgroundColor = ProfileColor(rawValue: color)
+        }
         
         let imageStore = ImageStore()
         image = imageStore.downloadImage(imageURLString: imageURLString)

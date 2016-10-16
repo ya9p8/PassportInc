@@ -159,7 +159,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P9r-MK-0k6">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="237" id="Ofo-N8-h2r"/>
-                                    <constraint firstAttribute="height" constant="189" id="VcX-Dz-Ru6"/>
+                                    <constraint firstAttribute="height" constant="160" id="VcX-Dz-Ru6"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzk-nj-qdP">
@@ -180,13 +180,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Hobbies" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="usU-qK-wxp">
-                                <frame key="frameInset" minX="16" minY="426" width="343" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oyz-fU-LSl">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="AuO-qb-JjH"/>
@@ -205,28 +198,76 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="15" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3MM-p2-N24">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="161" id="JVQ-RD-fco"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HobbyCell" rowHeight="15" id="vkR-PW-iRi">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="15"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vkR-PW-iRi" id="PGH-l8-Vyt">
+                                            <frame key="frameInset" width="375" height="14"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hobbies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipM-8T-ycN">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="1dz-GK-UIF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0D-un-Emv">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="y3X-qk-mwT"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem systemItem="add" id="1LZ-dm-2T6">
+                                        <connections>
+                                            <action selector="addAHobbyButtonTapped:" destination="KzN-gP-cFJ" id="LIG-Xd-Z69"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zzk-nj-qdP" firstAttribute="top" secondItem="P9r-MK-0k6" secondAttribute="bottom" constant="51" id="35L-Jq-gUY"/>
+                            <constraint firstItem="3MM-p2-N24" firstAttribute="leading" secondItem="szB-zv-VN6" secondAttribute="leading" id="5Ez-Bq-qgM"/>
+                            <constraint firstItem="bNd-KW-2vf" firstAttribute="top" secondItem="f0D-un-Emv" secondAttribute="bottom" id="7uO-rg-S1J"/>
                             <constraint firstItem="Oyz-fU-LSl" firstAttribute="top" secondItem="zzk-nj-qdP" secondAttribute="bottom" constant="8" id="GKG-oS-Cc7"/>
+                            <constraint firstItem="f0D-un-Emv" firstAttribute="leading" secondItem="szB-zv-VN6" secondAttribute="leading" id="LNL-LL-Ax4"/>
                             <constraint firstItem="zzk-nj-qdP" firstAttribute="leading" secondItem="szB-zv-VN6" secondAttribute="leadingMargin" id="NhH-JS-vU9"/>
                             <constraint firstItem="P9r-MK-0k6" firstAttribute="centerX" secondItem="szB-zv-VN6" secondAttribute="centerX" id="SHR-Yr-UkS"/>
                             <constraint firstItem="Wof-Pq-XfA" firstAttribute="leading" secondItem="zzk-nj-qdP" secondAttribute="trailing" constant="8" id="SsF-ec-Rgt"/>
+                            <constraint firstAttribute="trailing" secondItem="3MM-p2-N24" secondAttribute="trailing" id="ViH-dk-S9W"/>
                             <constraint firstItem="aBk-7E-mOb" firstAttribute="top" secondItem="Wof-Pq-XfA" secondAttribute="bottom" constant="8" id="Yon-US-Gvc"/>
+                            <constraint firstItem="ipM-8T-ycN" firstAttribute="leading" secondItem="szB-zv-VN6" secondAttribute="leadingMargin" id="aqK-Li-SIZ"/>
                             <constraint firstItem="Wof-Pq-XfA" firstAttribute="top" secondItem="P9r-MK-0k6" secondAttribute="bottom" constant="51" id="bHv-gd-g8d"/>
+                            <constraint firstAttribute="trailing" secondItem="f0D-un-Emv" secondAttribute="trailing" id="gno-Kw-ikf"/>
+                            <constraint firstItem="3MM-p2-N24" firstAttribute="top" secondItem="ipM-8T-ycN" secondAttribute="bottom" constant="10" id="hea-wb-piN"/>
                             <constraint firstItem="P9r-MK-0k6" firstAttribute="top" secondItem="VAE-Tv-Sv4" secondAttribute="bottom" constant="34" id="isp-J4-h4u"/>
                             <constraint firstItem="aBk-7E-mOb" firstAttribute="centerX" secondItem="Wof-Pq-XfA" secondAttribute="centerX" id="kWZ-3A-m2C"/>
+                            <constraint firstItem="f0D-un-Emv" firstAttribute="top" secondItem="3MM-p2-N24" secondAttribute="bottom" id="lxc-F9-NsW"/>
+                            <constraint firstItem="ipM-8T-ycN" firstAttribute="trailing" secondItem="szB-zv-VN6" secondAttribute="trailingMargin" id="nKB-a1-azh"/>
                             <constraint firstItem="Oyz-fU-LSl" firstAttribute="centerX" secondItem="zzk-nj-qdP" secondAttribute="centerX" id="sX0-fE-qZE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="M2H-Ww-Kwt">
-                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="edit" id="Rp7-ga-sUc"/>
+                        <barButtonItem key="rightBarButtonItem" title="Change Color" id="2b5-kY-C0M">
+                            <connections>
+                                <action selector="onChangeColorButtonTapped:" destination="KzN-gP-cFJ" id="e06-Wq-gRd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="ageLabel" destination="aBk-7E-mOb" id="9TH-Ib-oCi"/>
                         <outlet property="genderLabel" destination="Oyz-fU-LSl" id="iMK-5q-acA"/>
-                        <outlet property="hobbiesTextView" destination="usU-qK-wxp" id="tiK-ob-NmQ"/>
                         <outlet property="profileImageView" destination="P9r-MK-0k6" id="AEh-bH-hyC"/>
                     </connections>
                 </viewController>

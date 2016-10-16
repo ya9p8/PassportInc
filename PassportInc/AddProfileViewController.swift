@@ -43,10 +43,13 @@ class AddProfileViewController: UIViewController {
         if let name = nameTextField.text, let age = ageTextField.text, let gender = genderTextField.text {
             let lowercasedGender = gender.lowercased()
             var realGender: String!
+            var backgroundColor: ProfileColor!
             if lowercasedGender == "m" || lowercasedGender == "male" {
                 realGender = "M"
+                backgroundColor = .blue
             } else if lowercasedGender == "f" || lowercasedGender == "female" {
                 realGender = "F"
+                backgroundColor = .green
             } else {
                 // ERROR
             }
@@ -54,7 +57,7 @@ class AddProfileViewController: UIViewController {
             if let imageURL = profileImageUrl {
                 let urlString = "\(imageURL)"
                 
-                let profileDictionary = ["name": name, "age": age, "gender": realGender, "imageURL": urlString] as [String: Any]
+                let profileDictionary = ["name": name, "age": age, "gender": realGender, "imageURL": urlString, "color": backgroundColor.rawValue] as [String: Any]
                 databaseRef.child("profiles").childByAutoId().setValue(profileDictionary)
                 let _ = navigationController?.popViewController(animated: true)
             } else {
