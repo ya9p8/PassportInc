@@ -109,7 +109,7 @@ extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigatio
                 self.profileImageUrl = url
                 self.dismiss(animated: true, completion: nil)
             } else {
-                print("There was an error")
+               self.showErrorAlert(message: "There was an error saving the image. Please try again.")
             }
         }
     }
