@@ -28,6 +28,8 @@ class AddProfileViewController: UIViewController {
         super.viewDidLoad()
         imageStore = ImageStore()
         databaseRef = FIRDatabase.database().reference()
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(AddProfileViewController.doneButtonTapped(sender:)))
     }
     
     // MARK: IBAction Methods
@@ -40,7 +42,12 @@ class AddProfileViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
-    @IBAction func doneButtonTapped(sender: UIBarButtonItem) {
+     func doneButtonTapped(sender: UIBarButtonItem) {
+        if self.navigationItem.leftBarButtonItem!.title == "Cancel" {
+            let _ = navigationController?.popViewController(animated: true)
+            return
+        }
+        
         let name = nameTextField.text!
         let age = ageTextField.text!
         let gender = genderTextField.text!
@@ -87,7 +94,7 @@ class AddProfileViewController: UIViewController {
 }
 
 
-extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
@@ -105,8 +112,13 @@ extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigatio
                 print("There was an error")
             }
         }
-        
-       
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if !textField.text!.isEmpty {
+            self.navigationItem.leftBarButtonItem!.title = "Done"
+        }
+        
+        return true
+    }
 }

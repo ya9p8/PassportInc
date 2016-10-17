@@ -103,14 +103,14 @@ class ProfileListTableViewController: UITableViewController {
             let profileToDelete = profiles[indexPath.row]
             ref.child(profileToDelete.id).removeValue()
             
-            // delete picture from storage
-            let storage = FIRStorage.storage()
-            let storageRef = storage.reference(withPath: "gs://passportinc-8091c.appspot.com")
-            let imageRef = storageRef.child("images").child(profileToDelete.imageURLString!)
-            imageRef.delete(completion: { (error) in
-                if error != nil { print(error?.localizedDescription) }
-                else { self.tableView.reloadData() }
-            })
+            // delete picture from storage WIP
+//            let storage = FIRStorage.storage()
+//            let storageRef = storage.reference(withPath: "gs://passportinc-8091c.appspot.com")
+//            let imageRef = storageRef.child("images").child(profileToDelete.imageURLString!)
+//            imageRef.delete(completion: { (error) in
+//                if error != nil { print(error?.localizedDescription) }
+//                else { self.tableView.reloadData() }
+           // })
         }
     }
     
