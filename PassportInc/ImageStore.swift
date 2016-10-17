@@ -6,52 +6,72 @@
 //  Copyright © 2016 Yemi Ajibola. All rights reserved.
 //
 
+
+
+// THIS CLASS IS REPSONSIBLE FOR CACHING IMAGES
+
 import UIKit
 import FirebaseStorage
 
 class ImageStore {
     
-    private var imageStorage: FIRStorage!
-    private var imageStorageRef: FIRStorageReference!
-    private var imageRef: FIRStorageReference!
+//    private var imageStorage: FIRStorage!
+//    private var imageStorageRef: FIRStorageReference!
+//    private var imageRef: FIRStorageReference!
+//    
+//    
+//    typealias Completion = (_ success: Bool, _ url: URL) -> Void
+//    
+//    init() {
+//        imageStorage = FIRStorage.storage()
+//        imageStorageRef = imageStorage.reference(withPath: "gs://passportinc-8091c.appspot.com")
+//        imageRef = imageStorageRef.child("images")
+//    }
+//    
+//    func uploadImage(image: UIImage, completionHandler: @escaping Completion) {
+//        let data = UIImageJPEGRepresentation(image, 1.0)
+//        var flag: Bool!
+//        let uid = NSUUID()
+//        let filePath = "\(uid)\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
+//        
+//        imageRef.child(filePath).put(data!, metadata: nil) { (metadata, error) in
+//            if error != nil {
+//                print("Error: \(error?.localizedDescription)")
+//                flag =  false
+//                return
+//            }
+//            flag  = true
+//            completionHandler(flag, metadata!.downloadURL()!)
+//        }
+//    }
+//    
+//    func downloadImage(imageURLString:String?) -> UIImage? {
+//        
+//        let imageURL = URL(string: imageURLString!)
+//        
+//        do {
+//            let data = try Data(contentsOf: imageURL!)
+//            // Convert to image
+//            return UIImage(data: data)
+//        } catch {
+//            print(error.localizedDescription)
+//            return nil
+//        }
+//    }
     
+    let cache = NSCache<NSString, UIImage>()
     
-    typealias Completion = (_ success: Bool, _ url: URL) -> Void
-    
-    init() {
-        imageStorage = FIRStorage.storage()
-        imageStorageRef = imageStorage.reference(withPath: "gs://passportinc-8091c.appspot.com")
-        imageRef = imageStorageRef.child("images")
+    func setImage(image: UIImage, forKey key: String) {
+        cache.setObject(image, forKey: key as NSString)
     }
     
-    func uploadImage(image: UIImage, completionHandler: @escaping Completion) {
-        let data = UIImageJPEGRepresentation(image, 1.0)
-        var flag: Bool!
-        let uid = NSUUID()
-        let filePath = "\(uid)\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
-        
-        imageRef.child(filePath).put(data!, metadata: nil) { (metadata, error) in
-            if error != nil {
-                print("Error: \(error?.localizedDescription)")
-                flag =  false
-                return
-            }
-            flag  = true
-            completionHandler(flag, metadata!.downloadURL()!)
-        }
+    func imageForKey(key: String) -> UIImage? {
+        return cache.object(forKey: key as NSString) as UIImage?
     }
     
-    func downloadImage(imageURLString:String?) -> UIImage? {
-        
-        let imageURL = URL(string: imageURLString!)
-        
-        do {
-            let data = try Data(contentsOf: imageURL!)
-            // Convert to image
-            return UIImage(data: data)
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
+    func deleteImageForKey(key: String) {
+        cache.removeObject(forKey: key as NSString)
     }
+
+
 }

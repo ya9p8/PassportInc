@@ -13,7 +13,9 @@ import FirebaseDatabase
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK: Custom Properties
     var profileToView: Profile!
-    var ref: FIRDatabaseReference!
+    var databaseRef: FIRDatabaseReference!
+    var profileRef: FIRDatabaseReference!
+    var imageStore: ImageStore!
     
     // MARK: IBOutlet Properties
     @IBOutlet var genderLabel: UILabel!
@@ -31,8 +33,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         setBackgroundColor()
     
-        
-        ref = FIRDatabase.database().reference().child("profiles").child(profileToView.id)
+        profileRef = databaseRef.child("profiles").child(profileToView.id)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,7 +63,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func fetchHobbies() {
-        ref.child("hobbies").observe(.value, with: { snapshot in
+        databaseRef.child("hobbies").observe(.value, with: { snapshot in
             var fetchedHobbies: [Hobby] = []
             
             for snap in snapshot.children {
@@ -94,7 +95,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let hobbyToDelete = self.profileToView.hobbies![indexPath.row]
-            ref.child("hobbies").child(hobbyToDelete.key).removeValue()
+            databaseRef.child("hobbies").child(hobbyToDelete.key).removeValue()
             fetchHobbies()
         }
     }
@@ -109,7 +110,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             let hobbyText = hobbyAlert.textFields!.first!.text
             
             // Add hobby to database
-            self.ref.child("hobbies").childByAutoId().setValue(hobbyText)
+            self.databaseRef.child("hobbies").childByAutoId().setValue(hobbyText)
         
             self.fetchHobbies()
         }
@@ -129,7 +130,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.profileToView.backgroundColor = color
                 self.setBackgroundColor()
                 
-                self.ref.child("color").setValue(self.profileToView.backgroundColor!.rawValue)
+                self.databaseRef.child("color").setValue(self.profileToView.backgroundColor!.rawValue)
             })
             changeColorPrompt.addAction(action)
         }

@@ -13,15 +13,15 @@ import FirebaseDatabase
 
 class ProfileListTableViewController: UITableViewController {
     var profiles:[Profile] = []
-    var ref: FIRDatabaseReference!
+    var databaseRef: FIRDatabaseReference!
     var imageStore: ImageStore!
+    var photoStore: PhotoStore!
     var filteredProfiles:[Profile] = []
     
     // MARK: UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = FIRDatabase.database().reference(withPath: "profiles")
-        imageStore = ImageStore()
+        databaseRef = FIRDatabase.database().reference(withPath: "profiles")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,7 +31,7 @@ class ProfileListTableViewController: UITableViewController {
     
     // MARK: Custom Methods
     func fetchProfiles() {
-        ref.observe(.value, with: { snapshot in
+        databaseRef.observe(.value, with: { snapshot in
             var newProfiles: [Profile] = []
             
             for profile in snapshot.children {
@@ -93,6 +93,7 @@ class ProfileListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell") as! ProfileTableViewCell
         let profile = filteredProfiles.isEmpty ? profiles[indexPath.row] : filteredProfiles[indexPath.row]
         cell.profile = profile
+        cell.updateWithImage(image: profile.image)
 
         return cell
     }
@@ -101,9 +102,17 @@ class ProfileListTableViewController: UITableViewController {
         if editingStyle == .delete {
             // remove from database
             let profileToDelete = profiles[indexPath.row]
-            ref.child(profileToDelete.id).removeValue()
+            databaseRef.child(profileToDelete.id).removeValue()
             self.tableView.reloadData()
+            
+            self.imageStore.deleteImageForKey(key: profileToDelete.imageKey!)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let profile = profiles[indexPath.row]
+        
+        store
     }
     
     // MARK: Navigation
@@ -112,6 +121,11 @@ class ProfileListTableViewController: UITableViewController {
             let destination = segue.destination as! ProfileViewController
             let selectedIndexPath = tableView.indexPathForSelectedRow
             destination.profileToView = profiles[selectedIndexPath!.row]
+            destination.imageStore = imageStore
+        }
+        else if segue.identifier == "toAddProfile" {
+            let destination = segue.destination as! AddProfileViewController
+            destination.imageStore = imageStore
         }
     }
     

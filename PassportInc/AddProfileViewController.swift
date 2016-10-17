@@ -16,6 +16,7 @@ class AddProfileViewController: UIViewController {
     var imageStore: ImageStore!
     var profileImageUrl: URL!
     var databaseRef: FIRDatabaseReference!
+    var imageKey: String!
     
     // MARK: IBOutlet Properties
     @IBOutlet var nameTextField: UITextField!
@@ -26,7 +27,6 @@ class AddProfileViewController: UIViewController {
     // MARK: UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageStore = ImageStore()
         databaseRef = FIRDatabase.database().reference()
     }
     
@@ -60,10 +60,9 @@ class AddProfileViewController: UIViewController {
                 showErrorAlert(message: "Please select male or female.")
             }
             
-            if let imageURL = profileImageUrl {
-                let urlString = "\(imageURL)"
+            if (profileImageUrl) != nil {
                 
-                let profileDictionary = ["name": name, "age": age, "gender": realGender, "imageURL": urlString, "color": backgroundColor.rawValue] as [String: Any]
+                let profileDictionary = ["name": name, "age": age, "gender": realGender, "imageURL": profileImageUrl.absoluteString, "imageID": imageKey, "color": backgroundColor.rawValue] as [String: Any]
                 databaseRef.child("profiles").childByAutoId().setValue(profileDictionary)
                 let _ = navigationController?.popViewController(animated: true)
             } else {
@@ -96,15 +95,20 @@ extension AddProfileViewController: UIImagePickerControllerDelegate, UINavigatio
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerEditedImage] as! UIImage
         
+        imageKey = UUID().uuidString
+        
         profilePictureImageView.image = image
-        imageStore.uploadImage(image: image) { (success, url) in
-            if success {
-                self.profileImageUrl = url
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                print("There was an error")
-            }
-        }
+        
+        imageStore.setImage(image: image, forKey: imageKey)
+        
+//        imageStore.uploadImage(image: image) { (success, url) in
+//            if success {
+//                self.profileImageUrl = url
+//                self.dismiss(animated: true, completion: nil)
+//            } else {
+//                print("There was an error")
+//            }
+//        }
         
        
     }

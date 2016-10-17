@@ -48,6 +48,10 @@
                                             <frame key="frameInset" minX="303" minY="5" width="64" height="56"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="LdX-3f-mwo">
+                                            <frame key="frameInset" minX="325" minY="23" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -55,6 +59,7 @@
                                     <outlet property="genderLabel" destination="Q3Z-lB-maY" id="XoX-bf-DqQ"/>
                                     <outlet property="nameLabel" destination="fVO-gA-Fzx" id="XMq-id-1d4"/>
                                     <outlet property="profileImageView" destination="Mrf-rg-nZQ" id="SNn-Li-hn8"/>
+                                    <outlet property="spinner" destination="LdX-3f-mwo" id="4rc-0g-dqo"/>
                                     <segue destination="KzN-gP-cFJ" kind="show" identifier="toProfileView" id="daB-AQ-5DX"/>
                                 </connections>
                             </tableViewCell>
@@ -72,7 +77,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="fY9-56-vjT">
                             <connections>
-                                <segue destination="cu2-47-gzg" kind="show" id="gDT-9Z-TpJ"/>
+                                <segue destination="cu2-47-gzg" kind="show" identifier="toAddProfile" id="gDT-9Z-TpJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

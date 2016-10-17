@@ -23,12 +23,31 @@ class ProfileTableViewCell: UITableViewCell {
     @IBOutlet var ageLabel: UILabel!
     @IBOutlet var genderLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var spinner: UIActivityIndicatorView!
+    
+    // MARK: TableViewCell Construction
+    override func awakeFromNib() {
+        updateWithImage(image: nil)
+    }
+    
+    override func prepareForReuse() {
+        updateWithImage(image: nil)
+    }
     
     // MARK: Custom Methods
     func updateUI() {
         nameLabel.text = "Name: \(profile.name)"
         ageLabel.text = "Age: \(profile.age)"
         genderLabel.text = "Gender: \(profile.gender)"
-        profileImageView.image = profile.image
+    }
+    
+    func updateWithImage(image: UIImage?) {
+        if let imageToDisplay = image {
+            spinner.stopAnimating()
+            profileImageView.image = imageToDisplay
+        } else {
+            spinner.startAnimating()
+            profileImageView.image = nil
+        }
     }
 }

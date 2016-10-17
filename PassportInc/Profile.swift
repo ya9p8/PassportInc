@@ -38,6 +38,7 @@ struct Profile {
     var id: String
     var image: UIImage?
     var imageURLString: String?
+    var imageKey: String?
     var hobbies: [Hobby]?
     var gender: String
     var backgroundColor: ProfileColor?
@@ -60,9 +61,12 @@ struct Profile {
         if let color = profileDictionary["color"] as! String? {
             backgroundColor = ProfileColor(rawValue: color)
         }
+        if let imageKey = profileDictionary["imageID"] as! String? {
+            self.imageKey = imageKey
+        }
         
-        let imageStore = ImageStore()
-        image = imageStore.downloadImage(imageURLString: imageURLString)
+        //let imageStore = ImageStore()
+        //image = imageStore.downloadImage(imageURLString: imageURLString)
     }
     
 }

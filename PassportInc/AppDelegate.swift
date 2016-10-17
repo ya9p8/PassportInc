@@ -13,10 +13,18 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var imageStore: ImageStore!
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FIRApp.configure()
+        
+        imageStore = ImageStore()
+        
+        let navController = window!.rootViewController as! UINavigationController
+        let profileListController = navController.topViewController as! ProfileListTableViewController
+        profileListController.imageStore = imageStore
+        
         return true
     }
 
